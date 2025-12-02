@@ -1,0 +1,110 @@
+<div class="products-container">
+
+  <!-- HEADER -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="panel-heading">Products</h3>
+    <button class="btn btn-primary" id="btn-open-add-product">+ Add Product</button>
+  </div>
+
+  <!-- KPI METRICS -->
+  <div class="row g-3 mb-4">
+
+    <div class="col-md-3">
+      <div class="card kpi-card">
+        <div class="kpi-title">Total Products</div>
+        <div class="kpi-value" id="kpi-total-products">0</div>
+        <div class="kpi-sub">Active SKUs</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card kpi-card">
+        <div class="kpi-title">Total Stock</div>
+        <div class="kpi-value" id="kpi-total-stock">0</div>
+        <div class="kpi-sub">All inventory</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card kpi-card">
+        <div class="kpi-title">Low Stock Items</div>
+        <div class="kpi-value text-danger" id="kpi-low-stock">0</div>
+        <div class="kpi-sub">Needs restock</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card kpi-card kpi-warning">
+        <div class="kpi-title">Out of Stock</div>
+        <div class="kpi-value text-danger" id="kpi-out-stock">0</div>
+        <div class="kpi-sub">Urgent</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FILTERS -->
+  <div class="card p-3 mb-4">
+    <div class="row g-3">
+
+      <div class="col-md-4">
+        <input type="text" id="product-search" class="form-control" placeholder="Search product name...">
+      </div>
+
+      <div class="col-md-4">
+        <select id="product-category" class="form-select">
+          <option value="">All Categories</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <select id="product-sort" class="form-select">
+          <option value="">Sort by</option>
+          <option value="price_asc">Price (Low → High)</option>
+          <option value="price_desc">Price (High → Low)</option>
+          <option value="stock_asc">Stock (Low → High)</option>
+          <option value="stock_desc">Stock (High → Low)</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INVENTORY OVERVIEW -->
+  <div class="card p-4 mb-4">
+    <h5 class="section-title mb-3">Inventory Overview</h5>
+
+    <div class="inventory-grid">
+      <div>Total SKUs: <span id="inv-total-skus" class="fw-bold">0</span></div>
+      <div>Low Stock: <span id="inv-low" class="fw-bold text-danger">0</span></div>
+      <div>Out of Stock: <span id="inv-out" class="fw-bold text-danger">0</span></div>
+      <div>Fast-Moving: <span id="inv-fast" class="fw-bold text-primary">0</span></div>
+      <div>Slow-Moving: <span id="inv-slow" class="fw-bold text-muted">0</span></div>
+    </div>
+  </div>
+
+  <!-- PRODUCT TABLE -->
+  <div class="card p-3">
+    <table class="table table-hover align-middle" id="products-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody id="products-body">
+        <!-- JS renders rows -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- Add Product Modal -->
+<%- include('../modals/addProduct'); %>
