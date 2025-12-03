@@ -1,0 +1,92 @@
+<div class="modal fade" id="modalEditProduct" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form id="form-edit-product" enctype="multipart/form-data">
+
+          <input type="hidden" id="edit-id">
+
+          <div class="row g-3">
+
+            <div class="col-md-4 text-center">
+              <img id="edit-image-preview" src="/public/img/no-image.png" class="img-fluid rounded border mb-2" style="max-height:180px;">
+              <input type="file" id="edit-image" name="image" class="form-control mt-2">
+            </div>
+
+            <div class="col-md-8">
+              <div class="mb-2">
+                <label class="form-label">Product Name</label>
+                <input type="text" id="edit-name" class="form-control">
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">Description</label>
+                <textarea id="edit-description" class="form-control" rows="2"></textarea>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <label class="form-label">Price</label>
+                  <input type="number" id="edit-price" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-2">
+                  <label class="form-label">Cost</label>
+                  <input type="number" id="edit-cost" class="form-control">
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">Category</label>
+                <select id="edit-category" class="form-select"></select>
+              </div>
+
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- STOCK ADJUSTMENT -->
+          <div class="row g-3">
+
+            <div class="col-md-4">
+              <label class="form-label">Current Stock</label>
+              <input type="number" id="edit-stock" class="form-control" disabled>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Add Stock</label>
+              <input type="number" id="edit-add-stock" class="form-control" placeholder="Qty to add">
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Deduct Stock</label>
+              <input type="number" id="edit-deduct-stock" class="form-control" placeholder="Qty to deduct">
+            </div>
+
+          </div>
+
+          <div class="mt-3">
+            <label class="form-label">Adjustment Reason</label>
+            <input type="text" id="edit-reason" class="form-control" placeholder="Optional">
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger me-auto" id="btn-delete-product">Delete</button>
+        <button class="btn btn-primary" id="btn-save-edit-product">Save Changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>

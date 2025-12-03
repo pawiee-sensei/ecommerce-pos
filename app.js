@@ -10,6 +10,9 @@
     const app = express();
     const adminRoutes = require('./routes/admin');
 
+    const productRoutes = require('./routes/products');
+    const categoryRoutes = require('./routes/categories');
+
     // =========================
     // Helmet Security + CSP
     // =========================
@@ -86,6 +89,8 @@
     // =========================
     app.use('/auth', authRoutes);
     app.use('/admin', adminRoutes);
+    app.use('/products', productRoutes);
+    app.use('/categories', categoryRoutes);
 
     // Default redirect
     app.get('/', (req, res) => {
