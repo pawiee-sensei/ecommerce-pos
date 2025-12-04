@@ -45,19 +45,64 @@ module.exports = {
   // GET ALL PRODUCTS
   // ============================
   getProducts: async (req, res) => {
-    try {
-      const products = await productModel.getAllProducts();
+  try {
+    const q = req.query.q || "";
+    const category_id = req.query.category_id || "";
+    const sort = req.query.sort || "";
+    const page = parseInt(req.query.page) || 1;
+    const per_page = parseInt(req.query.per_page) || 20;
 
-      return res.json({
-        success: true,
-        products
-      });
+    // Fetch rows
+    const products = await productModel.getFilteredProducts({
+      q,
+      category_id,
+      sort,
+      page,
+      per_page
+    });
 
-    } catch (err) {
-      console.error("Fetch products error:", err);
-      return res.status(500).json({ success: false, message: "Server error" });
+    // Compute usage & notes for each product
+    for (let p of products) {
+      const avg = await productModel.getAverageDailyUsage(p.id, 30);
+      p.average_daily_usage = avg;
+
+      if (avg > 0) {
+        p.days_left = Number((p.stock / avg).toFixed(1));
+      } else {
+        p.days_left = null;
+      }
+
+      // Notes classification
+      p.notes = [];
+
+      if (avg >= 5) p.notes.push("Fast-moving");
+      if (avg > 0 && avg < 1) p.notes.push("Slow-moving");
+      if (p.days_left !== null && p.days_left < 3) p.notes.push("Restock soon");
+      if (p.stock === 0) p.notes.push("Out of stock");
+      if (avg === 0) p.notes.push("No sales recently");
     }
-  },
+
+    // Pagination meta
+    const total_items = await productModel.countFilteredProducts({ q, category_id });
+    const total_pages = Math.ceil(total_items / per_page);
+
+    return res.json({
+      success: true,
+      products,
+      meta: {
+        page,
+        per_page,
+        total_items,
+        total_pages
+      }
+    });
+
+  } catch (err) {
+    console.error("Fetch products error:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+},
+
 
   // ============================
   // GET PRODUCT BY ID

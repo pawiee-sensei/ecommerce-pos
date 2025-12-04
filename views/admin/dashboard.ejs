@@ -64,6 +64,14 @@
         <span class="nav-text">Strategy</span>
       </button>
 
+      <!-- STOCK LOGS -->
+      <button class="nav-link" data-panel="stocklogs">
+        <svg class="nav-icon" viewBox="0 0 24 24">
+          <path d="M3 6h18v2H3V6zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/>
+        </svg>
+        <span class="nav-text">Stock Logs</span>
+      </button>
+
     </nav>
 
   </aside>
@@ -78,20 +86,14 @@
     </header>
 
     <div id="panel-container" class="panel-container">
-      <!-- Panels load here -->
+      <!-- Dynamic panels inserted here -->
     </div>
   </main>
 
   <!-- JS -->
-  <!-- Bootstrap JS (local + CSP safe) -->
-<script src="/public/js/bootstrap.bundle.min.js"></script>
-
-<!-- Admin Panel Core -->
+  <script src="/public/js/bootstrap.bundle.min.js"></script>
 <script src="/public/js/admin.js"></script>
-
-<!-- Product Page Logic -->
 <script src="/public/js/products.js"></script>
-
 
 </body>
 </html>

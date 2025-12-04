@@ -24,13 +24,17 @@
             "default-src": ["'self'"],
 
             // Allow ONLY local scripts (no CDN JS allowed)
-            "script-src": ["'self'"],
+            "script-src": [
+            "'self'",
+            "/public/js/"],
+
 
             // Bootstrap CSS CDN allowed
             "style-src": [
             "'self'",
+            "'unsafe-inline'",   // REQUIRED for Bootstrap modals
             "https://cdn.jsdelivr.net",
-            "https://cdnjs.cloudflare.com"  // Bootstrap CSS
+            "https://cdnjs.cloudflare.com"
             ],
 
             // Allow images
