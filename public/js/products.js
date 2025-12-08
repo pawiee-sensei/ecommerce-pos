@@ -484,15 +484,39 @@ function escape(s){ if(s==null) return ''; return String(s).replace(/&/g,'&amp;'
 function groupLogsByProduct(logs){ const map={}; for(const l of logs) (map[l.product_id]=map[l.product_id]||[]).push(l); return map; }
 
 // ---------- Populate category select elements ----------
-function populateCategorySelects(){
-  const sel = $('#product-category');
-  const editSel = $('#edit-category');
-  if (sel) {
-    sel.innerHTML = `<option value="">All Categories</option>`;
-    for (const c of CATEGORIES) sel.insertAdjacentHTML('beforeend', `<option value="${c.id}">${escape(c.name)}</option>`);
+function populateCategorySelects() {
+  const filterSelect = document.getElementById('product-category');
+  const editSelect   = document.getElementById('edit-category');
+  const addSelect    = document.getElementById('add-category');
+
+  if (filterSelect) {
+    filterSelect.innerHTML = `<option value="">All Categories</option>`;
+    CATEGORIES.forEach(c => {
+      filterSelect.insertAdjacentHTML(
+        'beforeend',
+        `<option value="${c.id}">${escape(c.name)}</option>`
+      );
+    });
   }
-  if (editSel) {
-    editSel.innerHTML = `<option value="">Select category</option>`;
-    for (const c of CATEGORIES) editSel.insertAdjacentHTML('beforeend', `<option value="${c.id}">${escape(c.name)}</option>`);
+
+  if (editSelect) {
+    editSelect.innerHTML = `<option value="">Select Category</option>`;
+    CATEGORIES.forEach(c => {
+      editSelect.insertAdjacentHTML(
+        'beforeend',
+        `<option value="${c.id}">${escape(c.name)}</option>`
+      );
+    });
+  }
+
+  if (addSelect) {
+    addSelect.innerHTML = `<option value="">Select Category</option>`;
+    CATEGORIES.forEach(c => {
+      addSelect.insertAdjacentHTML(
+        'beforeend',
+        `<option value="${c.id}">${escape(c.name)}</option>`
+      );
+    });
   }
 }
+
